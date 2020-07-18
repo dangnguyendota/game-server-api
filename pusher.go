@@ -1,4 +1,4 @@
-package gs_interface
+package gsi
 
 type NotificationPusher interface {
 	Push(message *NotificationMessage)

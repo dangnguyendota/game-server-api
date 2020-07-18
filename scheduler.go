@@ -1,4 +1,4 @@
-package gs_interface
+package gsi
 
 import "time"
 
