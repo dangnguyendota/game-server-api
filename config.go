@@ -3,10 +3,11 @@ package gsi
 import "github.com/gocql/gocql"
 
 type ConfigAll struct {
-	Pusher          *PusherConfig
-	Database        *DatabaseConfig
-	WebsocketServer *WebsocketServerConfig
-	MatchingServer  *MatchingServerConfig
+	Pusher         *PusherConfig
+	Database       *DatabaseConfig
+	Matchmaker     *MatchmakerConfig
+	MatchingServer *MatchingServerConfig
+	ApiServer      *ApiServerConfig
 }
 
 type PusherConfig struct {
@@ -24,7 +25,8 @@ type DatabaseConfig struct {
 	MemcachedHost string
 }
 
-type WebsocketServerConfig struct {
+type MatchmakerConfig struct {
+	Host                       string
 	JwtSecret                  string
 	TokenExpiredTime           int
 	MaxMessageLength           int
@@ -39,5 +41,13 @@ type WebsocketServerConfig struct {
 }
 
 type MatchingServerConfig struct {
-	N int
+	Host string
+	N    int
+}
+
+type ApiServerConfig struct {
+	MetricsHost     string
+	LeaderBoardHost string
+	AdminHost       string
+	BotHost         string
 }
