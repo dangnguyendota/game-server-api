@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package ip;
+
+message Packet {
+    string packet_id = 1;
+    oneof message {
+        Error error = 2;
+        CreateRoom create_room = 3;
+        JoinRoom join_room = 4;
+        LeaveRoom leave_room = 5;
+        Room room = 6;
+        Player player = 7;
+        JoinLeave join_leave = 8;
+        DataSend data_send = 9;
+        RoomMessage room_message = 10;
+        InviteFriend invite_friend = 11;
+        StartGame start_game = 12;
+    }
+}
+
+message Error {
+    uint32 code = 1;
+    string message = 2;
+}
+
+message Player {
+    string id = 1;
+    string name = 2;
+    string display_name = 3;
+    string avatar = 4;
+    map<string, string> attributes = 5;
+    string sid = 6;
+}
+
+message Room {
+    string room_id = 1;
+    string room_type = 2;
+    repeated Player players = 3;
+    map<string, string> metadata = 4;
+}
+
+message CreateRoom {
+    string room_type = 1;
+}
+
+message LeaveRoom {
+    string room_id = 1;
+    string room_type = 2;
+}
+
+message JoinRoom {
+    string room_id = 1;
+    string room_type = 2;
+}
+
+message JoinLeave {
+    string room_id = 1;
+    repeated Player joins = 2;
+    repeated Player leaves = 3;
+}
+
+// client to server
+message DataSend {
+    string room_id = 1;
+    bytes data = 2;
+    repeated string to = 3;
+    int64 code = 4;
+    string room_type = 5;
+}
+
+// server to client
+message RoomMessage {
+    string room_type = 1;
+    string room_id = 2;
+    string from = 3;
+    bytes data = 4;
+    int64 code = 5;
+    int64 time = 6;
+}
+
+message InviteFriend {
+    string room_type = 1;
+    string room_id = 2;
+    string from_id = 3;
+    string friend_id = 4;
+}
+
+message StartGame {
+    string room_type = 1;
+    string room_id = 2;
+}
