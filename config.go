@@ -27,6 +27,7 @@ type DatabaseConfig struct {
 
 type MatchmakerConfig struct {
 	Host                       string
+	Port                       string
 	JwtSecret                  string
 	TokenExpiredTime           int
 	MaxMessageLength           int
@@ -42,12 +43,17 @@ type MatchmakerConfig struct {
 
 type MatchingServerConfig struct {
 	Host string
+	Port string
 	N    int
 }
 
 type ApiServerConfig struct {
 	MetricsHost     string
+	MetricsPort     string
 	LeaderBoardHost string
+	LeaderBoardPort string
 	AdminHost       string
+	AdminPort       string
 	BotHost         string
+	BotPort         string
 }
