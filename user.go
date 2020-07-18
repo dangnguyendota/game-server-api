@@ -1,7 +1,7 @@
 package gs_interface
 
 import (
-	"./proto"
+	"github.com/dangnguyendota/gs-interface/gs_proto"
 	"github.com/google/uuid"
 )
 
