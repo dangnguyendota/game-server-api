@@ -7,7 +7,8 @@ import (
 
 type User struct {
 	// base
-	ID          uuid.UUID `json:"id"`
+	SID         uuid.UUID `json:"sid"` // session id
+	ID          uuid.UUID `json:"id"`  // user id
 	Username    string    `json:"username"`
 	DisplayName string    `json:"display_name"`
 	Avatar      string    `json:"avatar"`
@@ -17,16 +18,12 @@ type User struct {
 
 func (user *User) ConvertToApi() *ip.Player {
 	player := &ip.Player{
+		Sid:         user.SID.String(),
 		Id:          user.ID.String(),
 		Name:        user.Username,
 		DisplayName: user.DisplayName,
 		Avatar:      user.Avatar,
 		Attributes:  user.Attributes,
-	}
-	if player.Attributes != nil {
-		if sid, ok := player.Attributes["sid"]; ok {
-			player.Sid = sid
-		}
 	}
 	return player
 }
