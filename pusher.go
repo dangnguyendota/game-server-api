@@ -1,12 +1,13 @@
 package gsi
 
 type NotificationPusher interface {
-	Push(message *NotificationMessage)
+	Push(message *NotificationMessage, f func(response []byte))
 	Config() *PusherConfig
 	Stop()
 }
 
 type NotificationMessage struct {
+	AppID            string            `json:"app_id"`
 	IncludePlayerIds []string          `json:"include_player_ids"`
 	IncludedSegments []string          `json:"included_segments"`
 	Data             map[string]string `json:"data"`
