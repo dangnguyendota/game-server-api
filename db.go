@@ -6,7 +6,6 @@ import (
 )
 
 type Database interface {
-	Config() *DatabaseConfig
 	GetUser(username, password string) (User, error)
 	GetUserFacebook(facebookToken string) (User, error)
 	GetUserGoogle(googleToken string) (User, error)

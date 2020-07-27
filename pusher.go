@@ -2,7 +2,6 @@ package gsi
 
 type NotificationPusher interface {
 	Push(message *NotificationMessage, f func(response []byte))
-	Config() *PusherConfig
 	Stop()
 }
 
