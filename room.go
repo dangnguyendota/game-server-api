@@ -22,6 +22,8 @@ type Room interface {
 	GetScheduler() Scheduler
 	GetPusher() NotificationPusher
 	GetDatabase() Database
-	Send(sid uuid.UUID, packet *ip.Packet)
-	SendAll(packet *ip.Packet)
+	Send(sid uuid.UUID, packet *ip.Packet) // send to separate user
+	SendAll(packet *ip.Packet) // send all viewers and players
+	SendAllPlayers(packet *ip.Packet) // send all players
+	SendAllViewers(packet *ip.Packet) // send all viewers
 }
