@@ -8,14 +8,17 @@ import (
 
 type Room interface {
 	ID() uuid.UUID
-	Type() string
-	Max() int
+	Game() string
+	MaxPlayers() int
+	MinPlayers() int
+	MaxViewers() int
 	Mode() ServerMode
-	CreateTime() int64
 	Logger() *zap.Logger
-	MetaData() map[string]string
-	CloseRoom()
+	Metadata() map[string]string
 	Players() []*User
+	Viewers() []*User
+	CreateTime() int64
+	Destroy()
 	GetScheduler() Scheduler
 	GetPusher() NotificationPusher
 	GetDatabase() Database
