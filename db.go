@@ -10,7 +10,7 @@ type Database interface {
 	GetUserFacebook(facebookToken string) (User, error)
 	GetUserGoogle(googleToken string) (User, error)
 	GetAdmin(username, password string) (User, error)
-	GetMemcachedClient() *memcache.Client
-	GetCassandraSession() *gocql.Session
+	MemcachedClient() *memcache.Client
+	CassandraSession() *gocql.Session
 	Close()
 }
