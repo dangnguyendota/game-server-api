@@ -1,7 +1,6 @@
 package gsi
 
 import (
-	"github.com/dangnguyendota/gs-interface/gs_proto"
 	"github.com/google/uuid"
 )
 
@@ -14,18 +13,6 @@ type User struct {
 	Avatar      string    `json:"avatar"`
 	// add your new attributes here
 	Attributes map[string]string `json:"attributes"`
-}
-
-func (user *User) ConvertToApi() *ip.Player {
-	player := &ip.Player{
-		Sid:         user.SID.String(),
-		Id:          user.ID.String(),
-		Name:        user.Username,
-		DisplayName: user.DisplayName,
-		Avatar:      user.Avatar,
-		Attributes:  user.Attributes,
-	}
-	return player
 }
 
 func (user *User) UpdateAttribute(attribute string, val string) {
