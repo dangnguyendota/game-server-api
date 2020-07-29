@@ -1,7 +1,6 @@
 package gsi
 
 import (
-	"github.com/dangnguyendota/gs-interface/gs_proto"
 	"github.com/google/uuid"
 	"go.uber.org/zap"
 )
@@ -22,8 +21,9 @@ type Room interface {
 	GetScheduler() Scheduler
 	GetPusher() NotificationPusher
 	GetDatabase() Database
-	Send(sid uuid.UUID, packet *ip.Packet) // send to separate user
-	SendAll(packet *ip.Packet) // send all viewers and players
-	SendAllPlayers(packet *ip.Packet) // send all players
-	SendAllViewers(packet *ip.Packet) // send all viewers
+	Send(sid uuid.UUID, data []byte)                      // send to separate user
+	SendAll(data []byte)                                  // send all viewers and players
+	SendAllPlayers(data []byte)                           // send all players
+	SendAllViewers(data []byte)                           // send all viewers
+	SendError(sid uuid.UUID, code uint32, message string) // send error to client
 }
