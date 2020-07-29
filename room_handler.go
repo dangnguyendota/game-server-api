@@ -9,8 +9,8 @@ type RoomHandler interface {
 	OnInit(room Room)
 	AllowJoin(room Room, user *User) *CheckJoinConditionResult
 	Processor(room Room, action string, data map[string]interface{})
-	onJoined(room Room, user *User)
-	onLeft(room Room, user *User)
-	onMessage(room Room, user *User, message []byte)
+	OnJoined(room Room, user *User)
+	OnLeft(room Room, user *User)
+	OnReceived(room Room, user *User, message []byte)
 	OnClose(room Room)
 }
