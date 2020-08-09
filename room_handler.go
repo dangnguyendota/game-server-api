@@ -11,6 +11,7 @@ type RoomData struct {
 	Time int64
 }
 
+// must implement for handle room messages
 type RoomHandler interface {
 	// init the game and return game state
 	OnInit(room Room) interface{}
@@ -27,3 +28,6 @@ type RoomHandler interface {
 	// when room is closed
 	OnClose(room Room)
 }
+
+// create a new room handler
+type CreateRoomHandlerFunc func() RoomHandler
