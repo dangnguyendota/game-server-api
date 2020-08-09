@@ -52,7 +52,7 @@ type Room interface {
 	// use one signal to push notification to clients
 	Pusher() NotificationPusher
 	// get database
-	Database() Database
+	DB() Database
 	// get dispatcher to send message to clients
 	Dispatcher() Dispatcher
 }
