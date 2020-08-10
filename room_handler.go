@@ -1,4 +1,4 @@
-package gsi
+package api
 
 type CheckJoinConditionResult struct {
 	Allow  bool

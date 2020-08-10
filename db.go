@@ -1,4 +1,4 @@
-package gsi
+package api
 
 type Database interface {
 }

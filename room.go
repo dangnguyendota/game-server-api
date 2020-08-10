@@ -1,4 +1,4 @@
-package gsi
+package api
 
 import (
 	"github.com/google/uuid"

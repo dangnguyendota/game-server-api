@@ -1,4 +1,4 @@
-package gsi
+package api
 
 type NotificationPusher interface {
 	Push(message *NotificationMessage, f func(response []byte))
