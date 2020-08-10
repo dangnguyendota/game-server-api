@@ -32,7 +32,7 @@ type Room interface {
 	// maximum of viewer per room
 	MaxViewers() int
 	// server mode (Authoritative MultiPlayer Server or Relayed MultiPlayer Server)
-	Mode() ServerMode
+	Mode() Mode
 	// logger to write log
 	Logger() *zap.Logger
 	// fixed metadata when init room
