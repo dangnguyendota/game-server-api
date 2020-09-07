@@ -25,6 +25,8 @@ type Room interface {
 	TickRate() int64
 	// returns unique game id
 	Game() string
+	// name of matchmaker node
+	Node() string
 	// returns maximum of players each room
 	MaxPlayers() int
 	// returns the minimum of players each room
