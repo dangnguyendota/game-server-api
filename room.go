@@ -19,40 +19,48 @@ type Dispatcher interface {
 }
 
 type Room interface {
-	// unique room id
+	// returns unique room id
 	ID() uuid.UUID
-	// number of game loop per second
+	// returns number of game loops per second
 	TickRate() int64
-	// unique game id
+	// returns unique game id
 	Game() string
-	// maximum of players per room
+	// returns maximum of players each room
 	MaxPlayers() int
-	// minimum of players per room
+	// returns the minimum of players each room
 	MinPlayers() int
-	// maximum of viewer per room
+	// returns the maximum of viewer each room
 	MaxViewers() int
-	// server mode (Authoritative MultiPlayer Server or Relayed MultiPlayer Server)
+	// returns server mode (Authoritative MultiPlayer Server or Relayed MultiPlayer Server)
 	Mode() Mode
 	// logger to write log
 	Logger() *zap.Logger
-	// fixed metadata when init room
+	// returns fixed, added metadata
 	Metadata() map[string]string
-	// current game state (store game state in memory for every game loop)
+	// returns current game state
 	State() interface{}
-	// current players in this room
+	// returns current players in this room
 	Players() []*User
-	// current viewers in this room
+	// returns current viewers in this room
 	Viewers() []*User
-	// time this room is created
+	// returns time this room is created
 	CreateTime() int64
+	// kick user
+	Kick(userId uuid.UUID) error
 	// destroy this room, kick all players and viewers
 	Destroy()
-	// scheduler to schedule actions
+	// pause game, wont handle any incoming packet
+	Pause()
+	// unpause game, allow client to send packet into room
+	Unpause()
+	// returns game is paused
+	Paused() bool
+	// returns scheduler to schedule actions
 	Scheduler() Scheduler
-	// use one signal to push notification to clients
+	// returns pusher, using one signal to push notification to clients
 	Pusher() NotificationPusher
-	// get database
+	// returns overwritten database
 	DB() Database
-	// get dispatcher to send message to clients
+	// returns dispatcher to send messages to clients
 	Dispatcher() Dispatcher
 }

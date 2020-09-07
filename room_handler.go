@@ -13,12 +13,14 @@ type RoomData struct {
 
 // must implement for handle room messages
 type RoomHandler interface {
-	// init the game and return game state
+	// reload phòng từ data lưu trong redis sau khi khởi động lại server
+	OnReload(room Room, state string) interface{}
+	// khởi tạo phòng
 	OnInit(room Room) interface{}
-	// check join condition for allow or disallow a user join this room
+	// kiểm tra điều kiện tham gia phòng của người chơi
 	AllowJoin(room Room, user *User) *CheckJoinConditionResult
-	// when scheduled an action, this action will jump here
-	Processor(room Room, action string, data map[string]interface{})
+	// sau khi một action đã được schedule trước đó
+	Processor(room Room, action string, data map[string]interface{}) interface{}
 	// when a user joined this room (players only) and return the game state
 	OnJoined(room Room, user *User) interface{}
 	// when a player left room (or disconnected) (players only) and return the game state
