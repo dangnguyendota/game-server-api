@@ -6,16 +6,22 @@ import (
 )
 
 type Dispatcher interface {
-	// send to separate user
-	Send(sid uuid.UUID, data []byte)
+	// send to one player
+	Send(userId uuid.UUID, data []byte)
 	// send all viewers and players
 	SendAll(data []byte)
+	// send all viewers and players except player with id "userId"
+	SendAllExceptOne(userId uuid.UUID, data []byte)
 	// send all players
 	SendAllPlayers(data []byte)
+	// send all players except player with id "userId"
+	SendAllPlayersExceptOne(userId uuid.UUID, data []byte)
 	// send all viewers
 	SendAllViewers(data []byte)
-	// send error to client
-	SendError(sid uuid.UUID, code uint32, message string)
+	// send all viewers except player with id "userId"
+	SendAllViewersExceptOne(userId uuid.UUID, data []byte)
+	// send error to player
+	SendError(userId uuid.UUID, code uint32, message string)
 }
 
 type Metadata interface {
@@ -54,10 +60,10 @@ type Room interface {
 	Metadata(name string) Metadata
 	// returns current game state
 	State() interface{}
-	// returns current players in this room
-	Players() []*User
-	// returns current viewers in this room
-	Viewers() []*User
+	// returns current active players in this room
+	Players() []uuid.UUID
+	// returns current active viewers in this room
+	Viewers() []uuid.UUID
 	// returns time this room is created
 	CreateTime() int64
 	// kick user
