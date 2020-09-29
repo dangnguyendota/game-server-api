@@ -18,6 +18,19 @@ type Dispatcher interface {
 	SendError(sid uuid.UUID, code uint32, message string)
 }
 
+type Metadata interface {
+	String() string
+	Byte() (byte, error)
+	Bytes() []byte
+	Int64() (int64, error)
+	Int32() (int32, error)
+	Uint64() (uint64, error)
+	Uint32() (uint32, error)
+	Float64() (float64, error)
+	Float32() (float32, error)
+	Json(interface{}) error
+}
+
 type Room interface {
 	// returns unique room id
 	ID() uuid.UUID
@@ -38,7 +51,7 @@ type Room interface {
 	// logger to write log
 	Logger() *zap.Logger
 	// returns fixed, added metadata
-	Metadata() map[string]string
+	Metadata(name string) Metadata
 	// returns current game state
 	State() interface{}
 	// returns current players in this room
