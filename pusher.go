@@ -1,7 +1,13 @@
 package api
 
+// NotificationPusher giúp bắn thông báo về máy người chơi thông qua dịch vụ
+// của bên thứ 3.
 type NotificationPusher interface {
+	// bắn thông báo cho người chơi
+	// message là thông báo muốn gửi về client.
+	// f là hàm xử lý response sẽ được gọi đến sau khi request gửi đi thành công.
 	Push(message *NotificationMessage, f func(response []byte))
+	// dừng NotificationPusher lại và xóa tất cả các con goroutines
 	Stop()
 }
 
