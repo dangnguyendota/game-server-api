@@ -27,9 +27,9 @@ type RoomData struct {
 // với mỗi game phải implement interface này để có thể lấy dữ liệu từ phòng
 type RoomHandler interface {
 	// reload phòng từ data lưu trong cache sau khi khởi động lại server
-	OnReload(room Room, state string) interface{}
+	Reload(room Room, state string) interface{}
 	// khởi tạo phòng
-	OnInit(room Room) interface{}
+	Created(room Room) interface{}
 	// kiểm tra điều kiện tham gia phòng của người chơi
 	AllowJoin(room Room, userId uuid.UUID) *CheckJoinConditionResult
 	// một action được schedule trước đó sau khi đến lịch sẽ nhảy vào hàm này
