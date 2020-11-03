@@ -36,7 +36,9 @@ type RoomHandler interface {
 	Processor(room Room, action string, data map[string]interface{}) interface{}
 	// người chơi tham gia vào phòng
 	OnJoined(room Room, userId uuid.UUID) interface{}
-	// người chơi thoát khỏi phòng
+	// xử lý request yêu cầu thoát của người chơi
+	OnExitRequest(room Room, userId uuid.UUID)
+	// người chơi thoát khỏi phòng hoặc bị kick
 	OnLeft(room Room, userId uuid.UUID) interface{}
 	// người chơi mất kết nối với server
 	OnDisconnected(room Room, userId uuid.UUID) interface{}
