@@ -96,6 +96,8 @@ type Room interface {
 	// lớp DB sẽ được tạo mới tùy ứng với từng game.
 	// đễ sử dụng DB thì phải ép kiểu sang dạng mà mình đã import vào.
 	DB() Database
+	// chứa các phương thức làm việc với Bot
+	Bot() Bot
 	// trả về Dispatcher của Room tương ứng.
 	Dispatcher() Dispatcher
 }
