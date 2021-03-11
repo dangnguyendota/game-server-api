@@ -17,5 +17,5 @@ type Bot interface {
 	// sau khi Bot server nhận được request sẽ xử lý request đó và trả về
 	// một response trong hàm callback
 	// returns error nếu call Bot thất bại
-	Call(request string, callback func(response string)) error
+	Call(botId uuid.UUID, request string, callback func(response string)) error
 }
