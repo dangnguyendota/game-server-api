@@ -13,5 +13,5 @@ type Bot interface {
 	// sau khi Bot server nhận được request sẽ xử lý request đó và trả về
 	// một response trong hàm callback
 	// returns error nếu call Bot thất bại
-	Call(ctx context.Context, request string, callback func(response string)) error
+	Call(ctx context.Context, request string, callback func(response string, err error)) error
 }
