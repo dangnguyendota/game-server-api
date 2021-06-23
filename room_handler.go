@@ -1,6 +1,14 @@
 package api
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+	"sync"
+)
+
+var (
+	handlersMu sync.RWMutex
+	handlers = make(map[string]CreateRoomHandlerFunc)
+)
 
 // điều kiện tham gia phòng của người chơi trả về
 // Allow bằng true nếu cho phép tham gia phòng
@@ -51,3 +59,23 @@ type RoomHandler interface {
 
 // tạo mới một room handler
 type CreateRoomHandlerFunc func() RoomHandler
+
+func RegisterHandler(gameId string, f CreateRoomHandlerFunc) {
+	handlersMu.Lock()
+	defer handlersMu.Unlock()
+	if f == nil {
+		panic("game api: register handler func is nil")
+	}
+	if _, dup := handlers[gameId]; dup {
+		panic("game api: register called twice for game id " + gameId)
+	}
+	handlers[gameId] = f
+}
+
+func GetHandlers() map[string]CreateRoomHandlerFunc {
+	return handlers
+}
+
+func GetHandler(gameId string) CreateRoomHandlerFunc {
+	return handlers[gameId]
+}
