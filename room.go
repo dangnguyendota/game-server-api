@@ -100,4 +100,8 @@ type Room interface {
 	Bot() Bot
 	// trả về Dispatcher của Room tương ứng.
 	Dispatcher() Dispatcher
+	// trả về true nếu server đã dừng
+	// trong trường hợp server sẽ tự động ngắt sau 1 khoảng thời gian nữa
+	// thì sẽ trả về true
+	StoppedServer() bool
 }
